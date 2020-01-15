@@ -1,33 +1,35 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelLoader : MonoBehaviour
+namespace Game.Scripts
 {
-    public Animator transition;
-
-    public float transitionTime = 1;
-    // Start is called before the first frame update
-    void Start()
+    public class LevelLoader : MonoBehaviour
     {
-        
-    }
+        public Animator transition;
 
-    // Update is called once per frame
-
-    public void LoadNextLevel()
-    {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
-    }
-
-    IEnumerator LoadLevel(int levelIndex)
-    {
-        transition.SetTrigger("Start");
+        public float transitionTime = 1;
+        // Start is called before the first frame update
+        void Start()
+        {
         
-        yield return new WaitForSeconds(transitionTime);
+        }
+
+        // Update is called once per frame
+
+        public void LoadNextLevel()
+        {
+            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        }
+
+        IEnumerator LoadLevel(int levelIndex)
+        {
+            transition.SetTrigger("Start");
         
-        SceneManager.LoadScene(levelIndex);
-    }
+            yield return new WaitForSeconds(transitionTime);
+        
+            SceneManager.LoadScene(levelIndex);
+        }
     
+    }
 }

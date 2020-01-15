@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
+using MainGame.Scripts.MainMenu;
 using NDream.AirConsole;
 using Newtonsoft.Json.Linq;
 using RockPaperScissor;
 using UnityEngine;
 
-namespace MainGame.Scripts.MainMenu
+namespace Game.Scripts.MainMenu
 {
     public class MainMenuManager : MonoBehaviour
     {
@@ -37,7 +38,7 @@ namespace MainGame.Scripts.MainMenu
 
                 if (AirConsoleController.playersAreReady())
                 {
-                    StartCoroutine(StartGame());
+                    StartCoroutine(LoadMainGame());
                     
                 }
                 else
@@ -47,9 +48,10 @@ namespace MainGame.Scripts.MainMenu
             }
         }
 
-        IEnumerator StartGame()
+        IEnumerator LoadMainGame()
         {
             yield return new WaitForSeconds(3);
+            AirConsoleController.instance.SwitchUI();
             LevelLoader levelLoader = FindObjectOfType<LevelLoader>();
             levelLoader.LoadNextLevel();
         }

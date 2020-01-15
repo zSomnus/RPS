@@ -1,0 +1,128 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Player Controls",
+            "id": "6008df87-4dfc-4ebf-a918-37e7cb2ecb6d",
+            "actions": [
+                {
+                    "name": "P1Rock",
+                    "type": "Button",
+                    "id": "75a6e659-5181-4d39-a3fb-fe9907a80d78",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P1Paper",
+                    "type": "Button",
+                    "id": "21fb5b31-d07f-4af2-99af-8a898aeef15e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Tap"
+                },
+                {
+                    "name": "P1Scissors",
+                    "type": "Button",
+                    "id": "1a66ce8a-adc9-4d17-8d3e-c0730d237910",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2Rock",
+                    "type": "Button",
+                    "id": "4d4c2103-7dfa-4177-a9da-cf173b2cfeab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2Paper",
+                    "type": "Button",
+                    "id": "0cc15529-9f4e-4183-9bf0-f3bcd8abf53b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2Scissor",
+                    "type": "Button",
+                    "id": "47eeb977-f3be-4029-a869-fbf0ef613b58",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "86d89fdf-2701-42ac-8c3f-2fb0163c154a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P1Rock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "534ef321-5139-4fc4-9870-73389ba09d14",
+                    "path": "<Keyboard>/w",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P1Paper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bb9df04-aae6-4ce2-8fda-30f131abfde1",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P1Scissors",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2eeb1434-b2cd-4976-9d62-b7fbf7b00217",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2Rock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d00f387c-b567-47f8-9bbf-58bd6bc71ef4",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2Paper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03973e49-4a18-41c6-93ad-1c19d59d271f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2Scissor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

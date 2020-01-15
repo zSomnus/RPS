@@ -1,4 +1,5 @@
-﻿using RockPaperScissor;
+﻿using Game.Scripts.DataClass;
+using RockPaperScissor;
 using UnityEngine;
 
 namespace MainGame.Scripts.MainMenu

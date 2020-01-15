@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5692028754236896977}
   - component: {fileID: 5692028754236896976}
   - component: {fileID: 5692028754236896979}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 5692028754435557053}
   - component: {fileID: 5692028754435557052}
   - component: {fileID: 5692028754435557055}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CrossFade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5692028754642516176}
   - component: {fileID: 5692028754642516179}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LevelLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 5692028754800740438}
   - component: {fileID: 5692028754800740436}
   - component: {fileID: 5692028754800740439}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: T_Loading
   m_TagString: Untagged
   m_Icon: {fileID: 0}

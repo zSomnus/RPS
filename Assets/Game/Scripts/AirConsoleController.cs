@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Scripts.DataClass;
 using NDream.AirConsole;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace RockPaperScissor
 {
@@ -10,14 +12,27 @@ namespace RockPaperScissor
     {
         public static PlayerInfo[] players;
 
+        [Tooltip("This html is used to display the interface shown for the main game ")]
+        public Object gameControllerHtml;
 
         public delegate void simpleEventHandler(PlayerInfo[] players);
 
         public static event simpleEventHandler onPlayerChanged;
+
+        public static AirConsoleController instance;
         
 
         private void Awake()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+            
             players = new PlayerInfo[2];
             AirConsole.instance.onMessage += OnMessage;
             AirConsole.instance.onConnect += OnConnect;
@@ -86,5 +101,22 @@ namespace RockPaperScissor
             return true;
         }
 
+        public void SwitchUI()
+        {
+            AirConsole.instance.controllerHtml = gameControllerHtml;
+        }
+
+        public bool PlayersMadeMoves()
+        {
+            foreach (PlayerInfo player in players)
+            {
+                if (player.handGesture == HandGesture.Pending)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
