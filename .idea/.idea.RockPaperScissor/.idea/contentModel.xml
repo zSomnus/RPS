@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\galax\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\galax\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_RPS.1304793752.00" t="ExcludeRecursive" />
-    <e p="G:\Unity\RPS" t="IncludeRecursive">
+    <e p="C:\Users\galax\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_RockPaperScissor.1062343494.00" t="ExcludeRecursive" />
+    <e p="G:\Unity\RockPaperScissor" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -57,7 +57,6 @@
             <e p="WebsocketListener.cs" t="Include" />
           </e>
         </e>
-        <e p="CountDownPanel.cs" t="Include" />
         <e p="MainGame" t="Include">
           <e p="scripts" t="Include">
             <e p="AirConsoleController.cs" t="Include" />
@@ -66,6 +65,7 @@
             </e>
             <e p="LevelLoader.cs" t="Include" />
             <e p="MainMenu" t="Include">
+              <e p="CountDownPanel.cs" t="Include" />
               <e p="MainMenuManager.cs" t="Include" />
               <e p="MainMenuUiController.cs" t="Include" />
             </e>
@@ -102,7 +102,7 @@
       </e>
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
-      <e p="RPS.sln" t="IncludeFlat" />
+      <e p="RockPaperScissor.sln" t="IncludeFlat" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
   </component>
