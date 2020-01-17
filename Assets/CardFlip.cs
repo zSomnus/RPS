@@ -26,13 +26,12 @@ public class CardFlip : MonoBehaviour
                 break;
         }
 
-        Flip();
+        // Flip();
     }
 
     // Update is called once per frame
     void Update()
     {
-        print(transform.rotation.eulerAngles.y);
         if (isFlipping)
         {
             transform.Rotate(0, flipSpeed*Time.deltaTime, 0);

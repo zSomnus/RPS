@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Game.Scripts.DataClass;
 using UnityEngine;
 
@@ -15,6 +17,8 @@ namespace Game.Scripts
         public GameObject scissorsCard;
         public static CardGenerator instance;
 
+        public Boo.Lang.List<GameObject> cardsInScene;
+
         private void Awake()
         {
             if (instance == null)
@@ -25,6 +29,8 @@ namespace Game.Scripts
             {
                 Destroy(this);
             }
+            
+            cardsInScene = new Boo.Lang.List<GameObject>();
         }
 
         private void Start()
@@ -48,20 +54,27 @@ namespace Game.Scripts
                 case HandGesture.Paper:
                     Instantiate(paperCard, cardPositionPlayers[playerIndex]);
                     cardGenerated[playerIndex] = true;
+                    print("Generated paper for player "+playerIndex);
                     break;
                 case HandGesture.Rock:
                     Instantiate(rockCard, cardPositionPlayers[playerIndex]);
                     cardGenerated[playerIndex] = true;
+                    print("Generated rock for player "+playerIndex);
 
                     break;
                 case HandGesture.Scissors:
                     Instantiate(scissorsCard, cardPositionPlayers[playerIndex]);
                     cardGenerated[playerIndex] = true;
+                    print("Generated scissors for player "+playerIndex);
 
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            
         }
+
+        
     }
 }

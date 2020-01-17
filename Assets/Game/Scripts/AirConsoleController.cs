@@ -106,6 +106,10 @@ namespace RockPaperScissor
             AirConsole.instance.controllerHtml = gameControllerHtml;
         }
 
+        /// <summary>
+        /// return "Player State not equal to pending"
+        /// </summary>
+        /// <returns></returns>
         public bool PlayersMadeMoves()
         {
             foreach (PlayerInfo player in players)
@@ -114,6 +118,17 @@ namespace RockPaperScissor
                 {
                     return false;
                 }
+            }
+
+            return true;
+        }
+
+        public bool CheckIfAllPlayersReady()
+        {
+            foreach (PlayerInfo player in players)
+            {
+                if (player.handGesture == HandGesture.Pending)
+                    return false;
             }
 
             return true;

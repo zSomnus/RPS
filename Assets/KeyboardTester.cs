@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
 using Game.Scripts.DataClass;
 using RockPaperScissor;
 using UnityEngine;
@@ -43,7 +44,10 @@ public class KeyboardTester : MonoBehaviour
             print("Player 1 is pressing paper");
             AirConsoleController.players[0].handGesture = HandGesture.Paper;
             player1Paper = false;
-
+            
+            
+            GameManager.instance.TryGeneratePlayerCard();
+            GameManager.instance.TryFlipCardIfPlayerReady();
         }
 
         if (player1Scissor)
@@ -52,6 +56,9 @@ public class KeyboardTester : MonoBehaviour
             AirConsoleController.players[0].handGesture = HandGesture.Scissors;
             player1Scissor = false;
 
+            
+            GameManager.instance.TryGeneratePlayerCard();
+            GameManager.instance.TryFlipCardIfPlayerReady();
         }
 
         if (player1Rock)
@@ -59,6 +66,9 @@ public class KeyboardTester : MonoBehaviour
             print("Player 1 is pressing rock");
             AirConsoleController.players[0].handGesture = HandGesture.Rock;
             player1Rock = false;
+            
+            GameManager.instance.TryGeneratePlayerCard();
+            GameManager.instance.TryFlipCardIfPlayerReady();
 
         }
         
@@ -67,6 +77,9 @@ public class KeyboardTester : MonoBehaviour
             print("Player 2 is pressing paper");
             AirConsoleController.players[1].handGesture = HandGesture.Paper;
             player2Paper = false;
+            
+            GameManager.instance.TryGeneratePlayerCard();
+            GameManager.instance.TryFlipCardIfPlayerReady();
 
         }
 
@@ -75,6 +88,9 @@ public class KeyboardTester : MonoBehaviour
             print("Player 2 is pressing scissor");
             AirConsoleController.players[1].handGesture = HandGesture.Scissors;
             player2Scissor = false;
+            
+            GameManager.instance.TryGeneratePlayerCard();
+            GameManager.instance.TryFlipCardIfPlayerReady();
 
         }
 
@@ -83,19 +99,25 @@ public class KeyboardTester : MonoBehaviour
             print("Player 2 is pressing Rock");
             AirConsoleController.players[1].handGesture = HandGesture.Rock;
             player2Rock = false;
+            
+            GameManager.instance.TryGeneratePlayerCard();
+            GameManager.instance.TryFlipCardIfPlayerReady();
 
         }
 
         if (AirConsoleController.instance.PlayersMadeMoves())
         {
+            // GameManager.instance.TryGeneratePlayerCard();
             GameUiController.instance.ShowReadyUI();
 
         }
 
-        // onPlayerStateChanged?.Invoke();
+        
+        
+        
 
     }
-
+ 
     private void OnEnable()
     {
         inputAction.Enable();

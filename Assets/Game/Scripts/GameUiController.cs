@@ -39,38 +39,10 @@ public class GameUiController : MonoBehaviour
 
     }
 
-    public void DisplayPlayerHandGesture()
-    {
-        if (players.Length != handGesturePlayer.Length)
-        {
-            Debug.LogError("players length should be the same as hand gesture player's length");
-        }
-        for (int i = 0; i < players.Length; i++)
-        {
-            switch (players[i].handGesture)
-            {
-                case HandGesture.Paper:
-                    handGesturePlayer[i].sprite = paper;
-                    break;
-                case HandGesture.Rock:
-                    handGesturePlayer[i].sprite = rock;
-                    break;
-                case HandGesture.Scissors:
-                    handGesturePlayer[i].sprite = scissors;
-                    break;
-            }
-        }
-    }
-    
     public void ShowReadyUI()
     {
         readyUI.SetActive(true);
-        StartCoroutine(DisplayPlayerHandGestureDelay(countDownTimer));
     }
 
-    IEnumerator DisplayPlayerHandGestureDelay(float sec)
-    {
-        yield return new WaitForSeconds(sec);
-        DisplayPlayerHandGesture();
-    }
+    
 }

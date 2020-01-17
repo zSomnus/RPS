@@ -12,10 +12,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    
+    public delegate void PlayerHandler();
+    public event PlayerHandler onPlayerStateChanged;
+    
     private void Awake()
     {
-        onPlayerStateChanged += UpdateReadyUI;
+        onPlayerStateChanged += TryUpdateReadyUI;
         onPlayerStateChanged += TryGeneratePlayerCard;
+        onPlayerStateChanged += TryFlipCardIfPlayerReady;
     }
 
     // Start is called before the first frame update
@@ -32,8 +37,6 @@ public class GameManager : MonoBehaviour
         AirConsole.instance.onMessage += OnMessage;
     }
 
-    public delegate void PlayerHandler();
-    public event PlayerHandler onPlayerStateChanged;
     
 
     /// <summary>
@@ -66,17 +69,44 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void UpdateReadyUI()
+    private void TryUpdateReadyUI()
     {
-        GameUiController.instance.ShowReadyUI();
+        if (AirConsoleController.instance.CheckIfAllPlayersReady())
+        {
+            GameUiController.instance.ShowReadyUI();
+        }
     }
 
-    private void TryGeneratePlayerCard()
+    public void TryGeneratePlayerCard()
     {
         foreach (PlayerInfo player in AirConsoleController.players)
         {
             CardGenerator.instance.GenerateCardForPlayer(player);
         }
+    }
+
+    public void TryFlipCardIfPlayerReady()
+    {
+        if (AirConsoleController.instance.CheckIfAllPlayersReady())
+        {
+            StartCoroutine(FlipCards(3));
+        }
+    }
+    
+    public IEnumerator FlipCards(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        FlipCards();
+    }
+    public void FlipCards()
+    {
+        CardFlip p1Card = CardGenerator.instance.cardPositionPlayers[0].GetComponentInChildren<CardFlip>();
+        CardFlip p2Card = CardGenerator.instance.cardPositionPlayers[1].GetComponentInChildren<CardFlip>();
+
+        if (p1Card != null)
+            p1Card.Flip();
+        if(p2Card != null)
+            p2Card.Flip();
     }
     
 
