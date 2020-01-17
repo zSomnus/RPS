@@ -57,14 +57,23 @@
             <e p="WebsocketListener.cs" t="Include" />
           </e>
         </e>
+        <e p="CardDisplay.cs" t="Include" />
+        <e p="CardFlip.cs" t="Include" />
         <e p="Game" t="Include">
           <e p="PlayerInputActions.cs" t="Include" />
+          <e p="Prefabs" t="Include">
+            <e p="ScriptableObjects" t="Include">
+              <e p="Card.cs" t="Include" />
+            </e>
+          </e>
           <e p="scripts" t="Include">
             <e p="AirConsoleController.cs" t="Include" />
+            <e p="CardGenerator.cs" t="Include" />
             <e p="CountDownTimer.cs" t="Include" />
             <e p="DataClass" t="Include">
               <e p="PlayerInfo.cs" t="Include" />
             </e>
+            <e p="GameUiController.cs" t="Include" />
             <e p="LevelLoader.cs" t="Include" />
             <e p="MainMenu" t="Include">
               <e p="CountDownPanel.cs" t="Include" />
@@ -74,7 +83,6 @@
           </e>
         </e>
         <e p="GameManager.cs" t="Include" />
-        <e p="GameUiController.cs" t="Include" />
         <e p="KeyboardTester.cs" t="Include" />
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">

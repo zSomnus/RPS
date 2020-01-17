@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts;
 using Game.Scripts.DataClass;
 using NDream.AirConsole;
 using Newtonsoft.Json.Linq;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         onPlayerStateChanged += UpdateReadyUI;
+        onPlayerStateChanged += TryGeneratePlayerCard;
     }
 
     // Start is called before the first frame update
@@ -34,6 +36,11 @@ public class GameManager : MonoBehaviour
     public event PlayerHandler onPlayerStateChanged;
     
 
+    /// <summary>
+    /// Receive user button click
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="data"></param>
     private void OnMessage(int @from, JToken data)
     {
         var player = AirConsoleController.GetPlayerWithDeviceId(from);
@@ -57,12 +64,21 @@ public class GameManager : MonoBehaviour
         onPlayerStateChanged?.Invoke();
 
     }
-    
 
-    public void UpdateReadyUI()
+
+    private void UpdateReadyUI()
     {
         GameUiController.instance.ShowReadyUI();
     }
+
+    private void TryGeneratePlayerCard()
+    {
+        foreach (PlayerInfo player in AirConsoleController.players)
+        {
+            CardGenerator.instance.GenerateCardForPlayer(player);
+        }
+    }
+    
 
     
 }
