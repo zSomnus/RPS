@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    // State
+    public GameState state;
     
     public delegate void PlayerHandler();
     public event PlayerHandler onPlayerStateChanged;
@@ -21,6 +23,8 @@ public class GameManager : MonoBehaviour
         onPlayerStateChanged += TryUpdateReadyUI;
         onPlayerStateChanged += TryGeneratePlayerCard;
         onPlayerStateChanged += TryFlipCardIfPlayerReady;
+        AirConsole.instance.onMessage += OnMessage;
+
     }
 
     // Start is called before the first frame update
@@ -34,7 +38,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
-        AirConsole.instance.onMessage += OnMessage;
+
+        state = GameState.CardSelect;
     }
 
     
@@ -66,6 +71,25 @@ public class GameManager : MonoBehaviour
         
         onPlayerStateChanged?.Invoke();
 
+    }
+
+    private void Update()
+    {
+        if (state == GameState.Judge)
+        {
+            state = GameState.CardSelect;
+            StartCoroutine(JudgeAndRestartGame());
+        }
+    }
+
+    public IEnumerator JudgeAndRestartGame()
+    {
+        Judge();
+
+        yield return new WaitForSeconds(3);
+            
+        CardGenerator.instance.ClearBoard();
+        print("Board is cleared");
     }
 
 
@@ -108,7 +132,59 @@ public class GameManager : MonoBehaviour
         if(p2Card != null)
             p2Card.Flip();
     }
-    
 
-    
+    public void Judge()
+    {
+        if (AirConsoleController.players[0].handGesture == AirConsoleController.players[1].handGesture)
+        {
+            print("fair");
+        }
+        else
+        {
+            if (AirConsoleController.players[0].handGesture == HandGesture.Paper)
+            {
+                if (AirConsoleController.players[1].handGesture == HandGesture.Rock)
+                {
+                    print("player 1 wins");
+                }
+                else
+                {
+                    print("player 2 wins");
+                }
+            }
+
+            if (AirConsoleController.players[0].handGesture == HandGesture.Scissors)
+            {
+                if (AirConsoleController.players[1].handGesture == HandGesture.Paper)
+                {
+                    print("player 1 wins");
+                }
+                else
+                {
+                    print("player 2 wins");
+                }
+            }
+
+            if (AirConsoleController.players[0].handGesture == HandGesture.Rock)
+            {
+                if (AirConsoleController.players[1].handGesture == HandGesture.Scissors)
+                {
+                    print("player 1 wins");
+                }
+                else
+                {
+                    print("player 2 wins");
+                }
+            }
+
+        }
+
+    }
+
+
+}
+
+public enum GameState
+{
+    CardSelect, Judge, MiniGame, End
 }

@@ -39,12 +39,15 @@ public class CardFlip : MonoBehaviour
             {
                 isFlipping = false;
                 face = CardFace.FacingDown;
+                GameManager.instance.state = GameState.Judge;
             }
             else if (face == CardFace.FacingDown && transform.rotation.eulerAngles.y >= 0 && transform.rotation.eulerAngles.y <= 10)
             {
                 isFlipping = false;
                 face = CardFace.FacingUp;
+                GameManager.instance.state = GameState.Judge;
             }
+            
         }
     }
 
