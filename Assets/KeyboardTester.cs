@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts;
 using Game.Scripts.DataClass;
-using RockPaperScissor;
 using UnityEngine;
 
 public class KeyboardTester : MonoBehaviour
@@ -108,7 +107,7 @@ public class KeyboardTester : MonoBehaviour
         if (AirConsoleController.instance.PlayersMadeMoves())
         {
             // GameManager.instance.TryGeneratePlayerCard();
-            GameUiController.instance.ShowReadyUI();
+            GameManager.instance.TryUpdateReadyUI();
 
         }
 

@@ -1,5 +1,5 @@
-﻿using Game.Scripts.DataClass;
-using RockPaperScissor;
+﻿using Game.Scripts;
+using Game.Scripts.DataClass;
 using UnityEngine;
 
 namespace MainGame.Scripts.MainMenu
@@ -24,19 +24,7 @@ namespace MainGame.Scripts.MainMenu
             }
             AirConsoleController.onPlayerChanged += UpdateUi;
         }
-
-    
-        // Start is called before the first frame update
-        void Start()
-        {
         
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
 
         /// <summary>
         /// 

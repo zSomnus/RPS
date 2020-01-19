@@ -5,7 +5,6 @@ using Game.Scripts;
 using Game.Scripts.DataClass;
 using NDream.AirConsole;
 using Newtonsoft.Json.Linq;
-using RockPaperScissor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -77,7 +76,6 @@ public class GameManager : MonoBehaviour
     {
         if (state == GameState.Judge)
         {
-            state = GameState.CardSelect;
             StartCoroutine(JudgeAndRestartGame());
         }
     }
@@ -85,20 +83,19 @@ public class GameManager : MonoBehaviour
     public IEnumerator JudgeAndRestartGame()
     {
         Judge();
+        state = GameState.DisplayResult;
 
         yield return new WaitForSeconds(3);
-            
+        
         CardGenerator.instance.ClearBoard();
         print("Board is cleared");
+        state = GameState.CardSelect;
     }
 
 
-    private void TryUpdateReadyUI()
+    public void TryUpdateReadyUI()
     {
-        if (AirConsoleController.instance.CheckIfAllPlayersReady())
-        {
-            GameUiController.instance.ShowReadyUI();
-        }
+        GameUiController.instance.ShowReadyUI(AirConsoleController.instance.CheckIfAllPlayersReady() && state == GameState.CardSelect);
     }
 
     public void TryGeneratePlayerCard()
@@ -124,6 +121,7 @@ public class GameManager : MonoBehaviour
     }
     public void FlipCards()
     {
+        state = GameState.FilpCard;
         CardFlip p1Card = CardGenerator.instance.cardPositionPlayers[0].GetComponentInChildren<CardFlip>();
         CardFlip p2Card = CardGenerator.instance.cardPositionPlayers[1].GetComponentInChildren<CardFlip>();
 
@@ -145,11 +143,11 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Rock)
                 {
-                    print("player 1 wins");
+                    AirConsoleController.players[0].Score++;
                 }
                 else
                 {
-                    print("player 2 wins");
+                    AirConsoleController.players[1].Score++;
                 }
             }
 
@@ -157,11 +155,11 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Paper)
                 {
-                    print("player 1 wins");
+                    AirConsoleController.players[0].Score++;
                 }
                 else
                 {
-                    print("player 2 wins");
+                    AirConsoleController.players[1].Score++;
                 }
             }
 
@@ -169,11 +167,11 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Scissors)
                 {
-                    print("player 1 wins");
+                    AirConsoleController.players[0].Score++;
                 }
                 else
                 {
-                    print("player 2 wins");
+                    AirConsoleController.players[1].Score++;
                 }
             }
 
@@ -186,5 +184,5 @@ public class GameManager : MonoBehaviour
 
 public enum GameState
 {
-    CardSelect, Judge, MiniGame, End
+    CardSelect, FilpCard, Judge, DisplayResult, MiniGame, End
 }

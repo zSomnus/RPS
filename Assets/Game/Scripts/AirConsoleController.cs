@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Game.Scripts.DataClass;
+﻿using Game.Scripts.DataClass;
 using NDream.AirConsole;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace RockPaperScissor
+namespace Game.Scripts
 {
     public class AirConsoleController : MonoBehaviour
     {

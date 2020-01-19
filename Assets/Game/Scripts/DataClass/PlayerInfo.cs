@@ -18,6 +18,8 @@
         /// </summary>
         public bool ready { get; set; }
 
+        public int Score { get; set; }
+
         public HandGesture handGesture { get; set; } = HandGesture.Pending;
 
         public PlayerInfo(int deviceId, int index)

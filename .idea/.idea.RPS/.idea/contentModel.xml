@@ -59,6 +59,7 @@
         </e>
         <e p="CardDisplay.cs" t="Include" />
         <e p="CardFlip.cs" t="Include" />
+        <e p="CountDownText.cs" t="Include" />
         <e p="Game" t="Include">
           <e p="PlayerInputActions.cs" t="Include" />
           <e p="Prefabs" t="Include">

@@ -3,7 +3,6 @@ using System.Collections;
 using MainGame.Scripts.MainMenu;
 using NDream.AirConsole;
 using Newtonsoft.Json.Linq;
-using RockPaperScissor;
 using UnityEngine;
 
 namespace Game.Scripts.MainMenu

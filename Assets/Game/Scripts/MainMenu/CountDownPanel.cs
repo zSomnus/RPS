@@ -1,9 +1,7 @@
-﻿using System;
-using Game.Scripts.MainMenu;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
-namespace MainGame.Scripts.MainMenu
+namespace Game.Scripts.MainMenu
 {
     public class CountDownPanel : MonoBehaviour
     {
