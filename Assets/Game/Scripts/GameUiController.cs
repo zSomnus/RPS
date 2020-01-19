@@ -43,7 +43,7 @@ namespace Game.Scripts
         {
             for (int i = 0; i < AirConsoleController.players.Length; i++)
             {
-                playerScoreTexts[i].text =$"{AirConsoleController.players[i].Score}";
+                playerScoreTexts[i].text =$"{AirConsoleController.players[i].healthPoint}";
             }
         }
 

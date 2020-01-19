@@ -6,13 +6,16 @@ namespace Game.Scripts
 {
     public class LevelLoader : MonoBehaviour
     {
-        public Animator transition;
+        private Animator transition;
+
+        public int maingameSceneIndex = 1;
+        public int minigameSceneIndex = 2;
 
         public float transitionTime = 1;
         // Start is called before the first frame update
         void Start()
         {
-        
+            transition = transform.Find("CrossFade").GetComponent<Animator>();
         }
 
         // Update is called once per frame
@@ -20,6 +23,16 @@ namespace Game.Scripts
         public void LoadNextLevel()
         {
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        }
+
+        public void LoadMinigame()
+        {
+            StartCoroutine(LoadLevel(minigameSceneIndex));
+        }
+
+        public void LoadMainGame()
+        {
+            StartCoroutine(LoadLevel(maingameSceneIndex));
         }
 
         IEnumerator LoadLevel(int levelIndex)

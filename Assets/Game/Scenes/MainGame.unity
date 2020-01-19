@@ -729,6 +729,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 5692028754642516179, guid: ee395fdb808f0424f953d536d4800ba8,
+        type: 3}
+      propertyPath: maingameSceneIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692028754642516179, guid: ee395fdb808f0424f953d536d4800ba8,
+        type: 3}
+      propertyPath: minigameSceneIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5692028754800740439, guid: ee395fdb808f0424f953d536d4800ba8,
         type: 3}
       propertyPath: m_textInfo.characterCount

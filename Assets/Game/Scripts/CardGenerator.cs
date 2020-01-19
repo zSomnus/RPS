@@ -74,11 +74,14 @@ namespace Game.Scripts
 
         public void ClearBoard()
         {
-            foreach (var card in cardGenerated)
+            if (cardGenerated != null)
             {
-                Destroy(card);
+                foreach (var card in cardGenerated)
+                {
+                    Destroy(card);
+                }
+                cardGenerated = new GameObject[2];
             }
-            cardGenerated = new GameObject[2];
 
             foreach (var player in AirConsoleController.players)
             {

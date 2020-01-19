@@ -135,6 +135,33 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Test"",
+            ""id"": ""c1a5d178-5a96-4a9f-b3ac-afbc82a811bc"",
+            ""actions"": [
+                {
+                    ""name"": ""BackToMainGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""d2735ce6-b3f1-4c03-a1b3-8bf18d3c1743"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5ebe0d9f-d75d-41f1-b824-3dec334214bd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackToMainGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -147,6 +174,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_PlayerControls_P2Rock = m_PlayerControls.FindAction("P2Rock", throwIfNotFound: true);
         m_PlayerControls_P2Paper = m_PlayerControls.FindAction("P2Paper", throwIfNotFound: true);
         m_PlayerControls_P2Scissor = m_PlayerControls.FindAction("P2Scissor", throwIfNotFound: true);
+        // Test
+        m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
+        m_Test_BackToMainGame = m_Test.FindAction("BackToMainGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -265,6 +295,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
+
+    // Test
+    private readonly InputActionMap m_Test;
+    private ITestActions m_TestActionsCallbackInterface;
+    private readonly InputAction m_Test_BackToMainGame;
+    public struct TestActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public TestActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @BackToMainGame => m_Wrapper.m_Test_BackToMainGame;
+        public InputActionMap Get() { return m_Wrapper.m_Test; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
+        public void SetCallbacks(ITestActions instance)
+        {
+            if (m_Wrapper.m_TestActionsCallbackInterface != null)
+            {
+                @BackToMainGame.started -= m_Wrapper.m_TestActionsCallbackInterface.OnBackToMainGame;
+                @BackToMainGame.performed -= m_Wrapper.m_TestActionsCallbackInterface.OnBackToMainGame;
+                @BackToMainGame.canceled -= m_Wrapper.m_TestActionsCallbackInterface.OnBackToMainGame;
+            }
+            m_Wrapper.m_TestActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @BackToMainGame.started += instance.OnBackToMainGame;
+                @BackToMainGame.performed += instance.OnBackToMainGame;
+                @BackToMainGame.canceled += instance.OnBackToMainGame;
+            }
+        }
+    }
+    public TestActions @Test => new TestActions(this);
     public interface IPlayerControlsActions
     {
         void OnP1Rock(InputAction.CallbackContext context);
@@ -273,5 +336,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnP2Rock(InputAction.CallbackContext context);
         void OnP2Paper(InputAction.CallbackContext context);
         void OnP2Scissor(InputAction.CallbackContext context);
+    }
+    public interface ITestActions
+    {
+        void OnBackToMainGame(InputAction.CallbackContext context);
     }
 }

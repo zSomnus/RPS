@@ -13,17 +13,19 @@ public class GameManager : MonoBehaviour
 
     // State
     public GameState state;
-    
+
+    // reference 
+
     public delegate void PlayerHandler();
+
     public event PlayerHandler onPlayerStateChanged;
-    
+
     private void Awake()
     {
         onPlayerStateChanged += TryUpdateReadyUI;
         onPlayerStateChanged += TryGeneratePlayerCard;
         onPlayerStateChanged += TryFlipCardIfPlayerReady;
         AirConsole.instance.onMessage += OnMessage;
-
     }
 
     // Start is called before the first frame update
@@ -38,10 +40,14 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
 
+        if (AirConsoleController.instance.miniGameOutputData != null)
+        {
+            BackFromMinigame();
+        }
+
         state = GameState.CardSelect;
     }
 
-    
 
     /// <summary>
     /// Receive user button click
@@ -67,9 +73,8 @@ public class GameManager : MonoBehaviour
                 Debug.LogError($"Don't know how to process the command {message}");
                 break;
         }
-        
-        onPlayerStateChanged?.Invoke();
 
+        onPlayerStateChanged?.Invoke();
     }
 
     private void Update()
@@ -82,11 +87,33 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator JudgeAndRestartGame()
     {
-        Judge();
+        MiniGameInputData miniGameInputData = Judge();
         state = GameState.DisplayResult;
 
         yield return new WaitForSeconds(3);
+
         
+        // The game has a winner
+        if (miniGameInputData != null)
+        {
+            state = GameState.MiniGame;
+            LevelLoader levelLoader = FindObjectOfType<LevelLoader>();
+            AirConsoleController.instance.miniGameInputData = miniGameInputData;    // TODO 
+            levelLoader.LoadMinigame();
+        }
+        else
+        {
+            CardGenerator.instance.ClearBoard();
+            print("Board is cleared");
+            state = GameState.CardSelect;
+        }
+       
+    }
+
+    public void BackFromMinigame()
+    {
+        AirConsoleController.instance.miniGameOutputData.playerReceiveDamage.healthPoint -=
+            AirConsoleController.instance.miniGameOutputData.damage;
         CardGenerator.instance.ClearBoard();
         print("Board is cleared");
         state = GameState.CardSelect;
@@ -95,7 +122,8 @@ public class GameManager : MonoBehaviour
 
     public void TryUpdateReadyUI()
     {
-        GameUiController.instance.ShowReadyUI(AirConsoleController.instance.CheckIfAllPlayersReady() && state == GameState.CardSelect);
+        GameUiController.instance.ShowReadyUI(AirConsoleController.instance.CheckIfAllPlayersReady() &&
+                                              state == GameState.CardSelect);
     }
 
     public void TryGeneratePlayerCard()
@@ -113,12 +141,13 @@ public class GameManager : MonoBehaviour
             StartCoroutine(FlipCards(3));
         }
     }
-    
+
     public IEnumerator FlipCards(float sec)
     {
         yield return new WaitForSeconds(sec);
         FlipCards();
     }
+
     public void FlipCards()
     {
         state = GameState.FilpCard;
@@ -127,15 +156,21 @@ public class GameManager : MonoBehaviour
 
         if (p1Card != null)
             p1Card.Flip();
-        if(p2Card != null)
+        if (p2Card != null)
             p2Card.Flip();
     }
 
-    public void Judge()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>The player who wins</returns>
+    public MiniGameInputData Judge()
     {
+        MiniGameInputData result = null;
         if (AirConsoleController.players[0].handGesture == AirConsoleController.players[1].handGesture)
         {
-            print("fair");
+            print("It is a draw");
+            return null;
         }
         else
         {
@@ -143,11 +178,14 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Rock)
                 {
-                    AirConsoleController.players[0].Score++;
+                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
+                    AirConsoleController.players[1].healthPoint--;
                 }
                 else
                 {
-                    AirConsoleController.players[1].Score++;
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0]);
+
+                    AirConsoleController.players[0].healthPoint--;
                 }
             }
 
@@ -155,11 +193,15 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Paper)
                 {
-                    AirConsoleController.players[0].Score++;
+                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
+
+                    AirConsoleController.players[1].healthPoint--;
                 }
                 else
                 {
-                    AirConsoleController.players[1].Score++;
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0]);
+
+                    AirConsoleController.players[0].healthPoint--;
                 }
             }
 
@@ -167,22 +209,29 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Scissors)
                 {
-                    AirConsoleController.players[0].Score++;
+                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
+
+                    AirConsoleController.players[1].healthPoint--;
                 }
                 else
                 {
-                    AirConsoleController.players[1].Score++;
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0]);
+
+                    AirConsoleController.players[0].healthPoint--;
                 }
             }
-
         }
 
+        return result;
     }
-
-
 }
 
 public enum GameState
 {
-    CardSelect, FilpCard, Judge, DisplayResult, MiniGame, End
+    CardSelect,
+    FilpCard,
+    Judge,
+    DisplayResult,
+    MiniGame,
+    End
 }

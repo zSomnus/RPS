@@ -122,6 +122,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Test",
+            "id": "c1a5d178-5a96-4a9f-b3ac-afbc82a811bc",
+            "actions": [
+                {
+                    "name": "BackToMainGame",
+                    "type": "Button",
+                    "id": "d2735ce6-b3f1-4c03-a1b3-8bf18d3c1743",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5ebe0d9f-d75d-41f1-b824-3dec334214bd",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BackToMainGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

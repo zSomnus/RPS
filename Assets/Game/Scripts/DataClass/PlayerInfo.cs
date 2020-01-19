@@ -18,7 +18,7 @@
         /// </summary>
         public bool ready { get; set; }
 
-        public int Score { get; set; }
+        public int healthPoint { get; set; } = 30;
 
         public HandGesture handGesture { get; set; } = HandGesture.Pending;
 

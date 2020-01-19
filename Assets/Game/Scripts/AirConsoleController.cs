@@ -18,6 +18,9 @@ namespace Game.Scripts
         public static event simpleEventHandler onPlayerChanged;
 
         public static AirConsoleController instance;
+
+        public MiniGameInputData miniGameInputData;
+        public MiniGameOutputData miniGameOutputData;
         
 
         private void Awake()
