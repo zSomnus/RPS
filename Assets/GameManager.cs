@@ -57,24 +57,28 @@ public class GameManager : MonoBehaviour
     private void OnMessage(int @from, JToken data)
     {
         var player = AirConsoleController.GetPlayerWithDeviceId(from);
-        var message = data["action"].ToString();
+        var message = data.ToString();
+        print($"Message sent is {message}");
         switch (message)
         {
-            case "Rock":
-                player.handGesture = HandGesture.Rock;
+            case "viper":
+                player.handGesture = HandGesture.Viper;
                 break;
-            case "Paper":
-                player.handGesture = HandGesture.Paper;
+            case "chicken":
+                player.handGesture = HandGesture.Chicken;
                 break;
-            case "Scissors":
-                player.handGesture = HandGesture.Scissors;
+            case "fox":
+                player.handGesture = HandGesture.Fox;
+                break;
+            case "accepted":
+                TryGeneratePlayerCard();
+                TryFlipCardIfPlayerReady();
                 break;
             default:
                 Debug.LogError($"Don't know how to process the command {message}");
                 break;
         }
 
-        onPlayerStateChanged?.Invoke();
     }
 
     private void Update()
@@ -174,9 +178,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (AirConsoleController.players[0].handGesture == HandGesture.Paper)
+            if (AirConsoleController.players[0].handGesture == HandGesture.Chicken)
             {
-                if (AirConsoleController.players[1].handGesture == HandGesture.Rock)
+                if (AirConsoleController.players[1].handGesture == HandGesture.Viper)
                 {
                     result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
                     AirConsoleController.players[1].healthPoint--;
@@ -189,9 +193,9 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (AirConsoleController.players[0].handGesture == HandGesture.Scissors)
+            if (AirConsoleController.players[0].handGesture == HandGesture.Fox)
             {
-                if (AirConsoleController.players[1].handGesture == HandGesture.Paper)
+                if (AirConsoleController.players[1].handGesture == HandGesture.Chicken)
                 {
                     result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
 
@@ -205,9 +209,9 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (AirConsoleController.players[0].handGesture == HandGesture.Rock)
+            if (AirConsoleController.players[0].handGesture == HandGesture.Viper)
             {
-                if (AirConsoleController.players[1].handGesture == HandGesture.Scissors)
+                if (AirConsoleController.players[1].handGesture == HandGesture.Fox)
                 {
                     result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
 

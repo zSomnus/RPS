@@ -31,5 +31,5 @@
             
     }
     
-    public enum HandGesture{Pending ,Paper, Rock, Scissors}
+    public enum HandGesture{Pending ,Chicken, Viper, Fox}
 }

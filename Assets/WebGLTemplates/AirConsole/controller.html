@@ -1,131 +1,69 @@
+
 <html>
 <head>
-    <script type="text/javascript"
-            src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
-    <script type="text/javascript">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+  <style type=text/css>
+  /* the style sheet dictates what our elements (buttons, backgrounds etc.) will look like. */
+    #interact-button {
+      background-image: url("button.png");
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      width: 80%;
+      height: 60%;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
 
-        var airconsole;
-        var accepted = false;
+  </style>
+  
+  <script type="text/javascript">
 
-        function init() {
-            airconsole = new AirConsole({ "orientation": "landscape" });
-            /*
-            * Here we are adding support for mouse events manually.
-            * --> WE STRONGLY ENCOURAGE YOU TO USE THE AIRCONSOLE CONTROLS LIBRARY
-            * WHICH IS EVEN BETTER (BUT WE DONT WANT TO BLOAT THE CODE HERE).
-            * https://github.com/AirConsole/airconsole-controls/
-            *
-            * DO NOT USE ONCLICK HANDLERS.
-            * THEY ADD A 200MS DELAY!
-            */
-            if (!("ontouchstart" in document.createElement("div"))) {
-                var elements = document.getElementsByTagName("*");
-                for (var i = 0; i < elements.length; ++i) {
-                    var element = elements[i];
-                    var ontouchstart = element.getAttribute("ontouchstart");
-                    if (ontouchstart) {
-                        element.setAttribute("onmousedown", ontouchstart);
-                    }
-                    var ontouchend = element.getAttribute("ontouchend");
-                    if (ontouchend) {
-                        element.setAttribute("onmouseup", ontouchend);
-                    }
-                }
-            }
+    var airconsole;
+
+    function App() {
+
+    /* JavaScript / Functionality. Add functions and evens here */ 
+
+      this.airconsole = new AirConsole({"orientation": "portrait"})
+      
+      /*
+       * Here we are adding support for mouse events manually.
+       * --> WE STRONGLY ENCOURAGE YOU TO USE THE AIRCONSOLE CONTROLS LIBRARY
+       * WHICH IS EVEN BETTER (BUT WE DONT WANT TO BLOAT THE CODE HERE).
+       * https://github.com/AirConsole/airconsole-controls/
+       * 
+       * DO NOT USE ONCLICK HANDLERS.
+       * THEY ADD A 200MS DELAY!
+       */
+      if (!("ontouchstart" in document.createElement("div"))) {
+        var elements = document.getElementsByTagName("*");
+        for (var i = 0; i < elements.length; ++i) {
+          var element = elements[i];
+          var ontouchstart = element.getAttribute("ontouchstart");
+          if (ontouchstart) {
+            element.setAttribute("onmousedown", ontouchstart);
+          }
+          var ontouchend = element.getAttribute("ontouchend");
+          if (ontouchend) {
+            element.setAttribute("onmouseup", ontouchend);
+          }
         }
+      }
+    }
 
-        function touch(value) {
-            if (!accepted) {
-                airconsole.message(AirConsole.SCREEN, value)
-
-                if (value == 'fox') {
-                    document.getElementById("fox").style.border = "thick solid #0000FF";
-                    document.getElementById("chicken").style.border = "none";
-                    document.getElementById("viper").style.border = "none";
-
-                }
-
-                else if (value == 'chicken') {
-                    document.getElementById("chicken").style.border = "thick solid #0000FF";
-                    document.getElementById("fox").style.border = "none";
-                    document.getElementById("viper").style.border = "none";
+    App.prototype.sendMessageToScreen = function (msg){
+      console.log("button press");
+      this.airconsole.message(AirConsole.Screen, {"action": msg})
+    }
 
 
-                }
-
-                else if (value == 'viper') {
-                    document.getElementById("viper").style.border = "thick solid #0000FF";
-                    document.getElementById("fox").style.border = "none";
-                    document.getElementById("chicken").style.border = "none";
-
-                }
-
-            }
-            if (value == 'accepted') {
-                accepted = true;
-            }
-        }
-
-    </script>
-    <style type="text/css">
-
-
-        .button {
-            /*background-image: url("button.png");*/
-            position: absolute;
-            top: 25%;
-            width: 25%;
-            height: 50%;
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        .button-fox {
-            background-image: url("CardFox.png");
-            left: 7.5%;
-        }
-
-        .button-chicken {
-            background-image: url("CardChicken.png");
-            left: 37.5%;
-        }
-
-        .button-viper {
-            background-image: url("CardViper.png");
-            left: 67.5%;
-        }
-
-        .accept-button {
-            background-image: url("Check2.png");
-            position: absolute;
-            top: 80%;
-            left: 80%;
-            width: 15%;
-            height: 15%;
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-
-        .icons{
-            background-image: url("Icons.png");
-            position: absolute;
-            top: 80%;
-            left: 10%;
-            width: 15%;
-            height: 15%;
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-    </style>
+  </script>
 </head>
-<!--<body onload="window.app = new App()">
-    <div id="interact button" ontouchstart="window.app.sendMessageToScreen('interact')"></div>
-</body>-->
-<body onload="init()">
-    <div id ="fox" class="button button-fox" ontouchstart="touch('fox')"></div>
-    <div id="chicken" class="button button-chicken" ontouchstart="touch('chicken')"></div>
-    <div id="viper" class="button button-viper" ontouchstart="touch('viper')"></div>
-    <div class="accept-button" ontouchstart="touch('accepted')"></div>
-    <div class="icons"></div>
+<body onload="window.app = new App()">
+  <!-- Add your HTML elements here -->
+<div id="interact-button" ontouchstart="window.app.sendMessageToScreen('Ready')"></div>
+
 </body>
 </html>

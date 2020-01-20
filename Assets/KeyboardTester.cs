@@ -41,7 +41,7 @@ public class KeyboardTester : MonoBehaviour
         if (player1Paper)
         {
             print("Player 1 is pressing paper");
-            AirConsoleController.players[0].handGesture = HandGesture.Paper;
+            AirConsoleController.players[0].handGesture = HandGesture.Chicken;
             player1Paper = false;
             
             
@@ -52,7 +52,7 @@ public class KeyboardTester : MonoBehaviour
         if (player1Scissor)
         {
             print("Player 1 is pressing scissor");
-            AirConsoleController.players[0].handGesture = HandGesture.Scissors;
+            AirConsoleController.players[0].handGesture = HandGesture.Fox;
             player1Scissor = false;
 
             
@@ -63,7 +63,7 @@ public class KeyboardTester : MonoBehaviour
         if (player1Rock)
         {
             print("Player 1 is pressing rock");
-            AirConsoleController.players[0].handGesture = HandGesture.Rock;
+            AirConsoleController.players[0].handGesture = HandGesture.Viper;
             player1Rock = false;
             
             GameManager.instance.TryGeneratePlayerCard();
@@ -74,7 +74,7 @@ public class KeyboardTester : MonoBehaviour
         if (player2Paper)
         {
             print("Player 2 is pressing paper");
-            AirConsoleController.players[1].handGesture = HandGesture.Paper;
+            AirConsoleController.players[1].handGesture = HandGesture.Chicken;
             player2Paper = false;
             
             GameManager.instance.TryGeneratePlayerCard();
@@ -85,7 +85,7 @@ public class KeyboardTester : MonoBehaviour
         if (player2Scissor)
         {
             print("Player 2 is pressing scissor");
-            AirConsoleController.players[1].handGesture = HandGesture.Scissors;
+            AirConsoleController.players[1].handGesture = HandGesture.Fox;
             player2Scissor = false;
             
             GameManager.instance.TryGeneratePlayerCard();
@@ -96,7 +96,7 @@ public class KeyboardTester : MonoBehaviour
         if (player2Rock)
         {
             print("Player 2 is pressing Rock");
-            AirConsoleController.players[1].handGesture = HandGesture.Rock;
+            AirConsoleController.players[1].handGesture = HandGesture.Viper;
             player2Rock = false;
             
             GameManager.instance.TryGeneratePlayerCard();

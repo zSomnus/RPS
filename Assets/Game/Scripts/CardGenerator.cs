@@ -51,16 +51,16 @@ namespace Game.Scripts
             {
                 case HandGesture.Pending:
                     break;
-                case HandGesture.Paper:
+                case HandGesture.Chicken:
                     cardGenerated[playerIndex] = Instantiate(paperCard, cardPositionPlayers[playerIndex]);
                     print("Generated paper for player "+playerIndex);
                     break;
-                case HandGesture.Rock:
+                case HandGesture.Viper:
                     cardGenerated[playerIndex] = Instantiate(rockCard, cardPositionPlayers[playerIndex]);
                     print("Generated rock for player "+playerIndex);
 
                     break;
-                case HandGesture.Scissors:
+                case HandGesture.Fox:
                     cardGenerated[playerIndex] = Instantiate(scissorsCard, cardPositionPlayers[playerIndex]);
                     print("Generated scissors for player "+playerIndex);
 

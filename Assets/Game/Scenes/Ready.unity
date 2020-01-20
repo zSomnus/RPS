@@ -1822,7 +1822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865e38aef10e84c4182e332bc75f128c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameControllerHtml: {fileID: 4900000, guid: 5dd4bc38e7b962e42b0d6fae60342e3e, type: 3}
+  gameControllerHtml: {fileID: 4900000, guid: 7d40e63e836d479489cc02a9827f6518, type: 3}
 --- !u!1 &1441761861
 GameObject:
   m_ObjectHideFlags: 0
