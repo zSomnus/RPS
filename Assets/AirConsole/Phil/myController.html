@@ -1,7 +1,8 @@
 <html>
 <head>
     <script type="text/javascript"
-            src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+            src="https://www.airconsole.com/api/airconsole-1.7.0.js">
+    </script>
     <script type="text/javascript">
 
         var airconsole;
@@ -9,6 +10,8 @@
 
         function init() {
             airconsole = new AirConsole({ "orientation": "landscape" });
+            document.getElementById("ready-controller").style.display = "block";
+            document.getElementById("gameplay-controller").style.display = "none";
             /*
             * Here we are adding support for mouse events manually.
             * --> WE STRONGLY ENCOURAGE YOU TO USE THE AIRCONSOLE CONTROLS LIBRARY
@@ -42,22 +45,19 @@
                     document.getElementById("fox").style.border = "thick solid #0000FF";
                     document.getElementById("chicken").style.border = "none";
                     document.getElementById("viper").style.border = "none";
-
+                    //document.getElementById("fox").style.backgroundImage = "url(\"CardViper.png\")";
                 }
 
                 else if (value == 'chicken') {
                     document.getElementById("chicken").style.border = "thick solid #0000FF";
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("viper").style.border = "none";
-
-
                 }
 
                 else if (value == 'viper') {
                     document.getElementById("viper").style.border = "thick solid #0000FF";
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("chicken").style.border = "none";
-
                 }
 
             }
@@ -65,6 +65,23 @@
                 accepted = true;
             }
         }
+
+        function readyUp(msg) {
+            console.log("button press");
+            this.airconsole.message(AirConsole.Screen, { "action": msg })
+            document.getElementById("ready-controller").style.display = "none";
+            document.getElementById("gameplay-controller").style.display = "block";
+        }
+
+        //function delay(msg) {
+        //    setTimeout(function (msg) {
+        //        console.log("button press");
+        //        this.airconsole.message(AirConsole.Screen, { "action": msg })
+        //        document.getElementById("ready-controller").style.display = "none";
+        //        document.getElementById("gameplay-controller").style.display = "block";
+        //    }, 3000);
+        //}
+
 
     </script>
     <style type="text/css">
@@ -106,7 +123,7 @@
             background-repeat: no-repeat;
         }
 
-        .icons{
+        .icons {
             background-image: url("Icons.png");
             position: absolute;
             top: 80%;
@@ -116,16 +133,32 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
+
+        #interact-button {
+            background-image: url("button.png");
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 80%;
+            height: 60%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 <!--<body onload="window.app = new App()">
     <div id="interact button" ontouchstart="window.app.sendMessageToScreen('interact')"></div>
 </body>-->
 <body onload="init()">
-    <div id ="fox" class="button button-fox" ontouchstart="touch('fox')"></div>
-    <div id="chicken" class="button button-chicken" ontouchstart="touch('chicken')"></div>
-    <div id="viper" class="button button-viper" ontouchstart="touch('viper')"></div>
-    <div class="accept-button" ontouchstart="touch('accepted')"></div>
-    <div class="icons"></div>
+    <div id="ready-controller">
+        <div id="interact-button" ontouchstart="readyUp('Ready')"></div>
+    </div>
+    <div id="gameplay-controller">
+        <div id="fox" class="button button-fox" ontouchstart="touch('fox')"></div>
+        <div id="chicken" class="button button-chicken" ontouchstart="touch('chicken')"></div>
+        <div id="viper" class="button button-viper" ontouchstart="touch('viper')"></div>
+        <div class="accept-button" ontouchstart="touch('accepted')"></div>
+        <div class="icons"></div>
+    </div>
 </body>
 </html>
