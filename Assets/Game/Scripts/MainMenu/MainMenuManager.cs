@@ -38,7 +38,6 @@ namespace Game.Scripts.MainMenu
                 if (AirConsoleController.playersAreReady())
                 {
                     StartCoroutine(LoadMainGame());
-                    
                 }
                 else
                 {
@@ -50,6 +49,7 @@ namespace Game.Scripts.MainMenu
         IEnumerator LoadMainGame()
         {
             yield return new WaitForSeconds(3);
+            AirConsole.instance.Broadcast("Ready");
             AirConsoleController.instance.SwitchUI();
             LevelLoader levelLoader = FindObjectOfType<LevelLoader>();
             levelLoader.LoadNextLevel();

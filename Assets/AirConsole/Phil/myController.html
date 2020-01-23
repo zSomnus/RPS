@@ -7,11 +7,18 @@
 
         var airconsole;
         var accepted = false;
-
         function init() {
             airconsole = new AirConsole({ "orientation": "landscape" });
             document.getElementById("ready-controller").style.display = "block";
             document.getElementById("gameplay-controller").style.display = "none";
+
+            this.airconsole.onMessage = function (from, data) {
+                if (data == "Ready") {
+                    //delay();
+                    document.getElementById("ready-controller").style.display = "none";
+                    document.getElementById("gameplay-controller").style.display = "block";
+                }
+            }
             /*
             * Here we are adding support for mouse events manually.
             * --> WE STRONGLY ENCOURAGE YOU TO USE THE AIRCONSOLE CONTROLS LIBRARY
@@ -69,19 +76,16 @@
         function readyUp(msg) {
             console.log("button press");
             this.airconsole.message(AirConsole.Screen, { "action": msg })
-            document.getElementById("ready-controller").style.display = "none";
-            document.getElementById("gameplay-controller").style.display = "block";
+            //document.getElementById("ready-controller").style.display = "none";
+            //document.getElementById("gameplay-controller").style.display = "block";
         }
 
-        //function delay(msg) {
-        //    setTimeout(function (msg) {
-        //        console.log("button press");
-        //        this.airconsole.message(AirConsole.Screen, { "action": msg })
-        //        document.getElementById("ready-controller").style.display = "none";
-        //        document.getElementById("gameplay-controller").style.display = "block";
-        //    }, 3000);
-        //}
-
+        function delay() {
+            setTimeout(function () {
+                document.getElementById("ready-controller").style.display = "none";
+                document.getElementById("gameplay-controller").style.display = "block";
+            }, 4000);
+        }
 
     </script>
     <style type="text/css">
@@ -134,8 +138,19 @@
             background-repeat: no-repeat;
         }
 
-        #interact-button {
-            background-image: url("button.png");
+        .interact-button {
+            background-image: url("start.png");
+            position: absolute;
+            top: 40%;
+            left: 30%;
+            width: 40%;
+            height: 30%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        .menu-text {
+            background-image: url("title.png");
             position: absolute;
             top: 20%;
             left: 10%;
@@ -151,7 +166,8 @@
 </body>-->
 <body onload="init()">
     <div id="ready-controller">
-        <div id="interact-button" ontouchstart="readyUp('Ready')"></div>
+        <div id="title" class="menu-text"></div>
+        <div id="start" class="interact-button" ontouchstart="readyUp('Ready')"></div>
     </div>
     <div id="gameplay-controller">
         <div id="fox" class="button button-fox" ontouchstart="touch('fox')"></div>
@@ -160,5 +176,6 @@
         <div class="accept-button" ontouchstart="touch('accepted')"></div>
         <div class="icons"></div>
     </div>
+
 </body>
 </html>
