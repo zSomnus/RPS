@@ -18,6 +18,13 @@
                     document.getElementById("ready-controller").style.display = "none";
                     document.getElementById("gameplay-controller").style.display = "block";
                 }
+
+                else if (data == "Reset") {
+                    accepted = false;
+                    document.getElementById("fox").style.border = "none";
+                    document.getElementById("chicken").style.border = "none";
+                    document.getElementById("viper").style.border = "none";
+                }
             }
             /*
             * Here we are adding support for mouse events manually.
@@ -70,6 +77,7 @@
             }
             if (value == 'accepted') {
                 accepted = true;
+                delay();
             }
         }
 
@@ -82,8 +90,10 @@
 
         function delay() {
             setTimeout(function () {
-                document.getElementById("ready-controller").style.display = "none";
-                document.getElementById("gameplay-controller").style.display = "block";
+                accepted = false;
+                document.getElementById("fox").style.border = "none";
+                document.getElementById("chicken").style.border = "none";
+                document.getElementById("viper").style.border = "none";
             }, 4000);
         }
 
