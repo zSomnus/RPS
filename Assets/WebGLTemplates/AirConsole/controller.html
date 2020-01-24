@@ -8,6 +8,7 @@
         var airconsole;
         var accepted = false;
         var ready = false;
+        var choice;
         function init() {
             airconsole = new AirConsole({ "orientation": "landscape" });
             document.getElementById("ready-controller").style.display = "block";
@@ -29,6 +30,7 @@
                     document.getElementById("fox").style.backgroundImage = "url(\"CardFox.png\")";
                     document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
                     document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
+                    document.getElementById("check").style.backgroundImage = "url(\"Check2.png\")";
                 }
 
                 else if (data == "Starting") {
@@ -66,38 +68,41 @@
 
         function touch(value) {
             if (!accepted) {
-                airconsole.message(AirConsole.SCREEN, value)
-
                 if (value == 'fox') {
-                    document.getElementById("fox").style.border = "thick solid #0000FF";
+                    document.getElementById("fox").style.border = "thick solid #00FF00";
                     document.getElementById("chicken").style.border = "none";
                     document.getElementById("viper").style.border = "none";
                     document.getElementById("fox").style.backgroundImage = "url(\"CardFoxAnimation.gif\")";
                     document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
                     document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
+                    choice = 'fox';
                 }
 
                 else if (value == 'chicken') {
-                    document.getElementById("chicken").style.border = "thick solid #0000FF";
+                    document.getElementById("chicken").style.border = "thick solid #00FF00";
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("viper").style.border = "none";
                     document.getElementById("fox").style.backgroundImage = "url(\"CardFox.png\")";
                     document.getElementById("chicken").style.backgroundImage = "url(\"CardChickenAnimation.gif\")";
                     document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
+                    choice = 'chicken';
                 }
 
                 else if (value == 'viper') {
-                    document.getElementById("viper").style.border = "thick solid #0000FF";
+                    document.getElementById("viper").style.border = "thick solid #00FF00";
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("chicken").style.border = "none";
                     document.getElementById("fox").style.backgroundImage = "url(\"CardFox.png\")";
                     document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
                     document.getElementById("viper").style.backgroundImage = "url(\"CardViperAnimation.gif\")";
+                    choice = 'viper';
                 }
 
             }
             if (value == 'accepted') {
                 accepted = true;
+                document.getElementById("check").style.backgroundImage = "url(\"Check3.png\")";
+                airconsole.message(AirConsole.SCREEN, value)
             }
         }
 
@@ -118,6 +123,7 @@
                 //document.getElementById("ready").style.display = "block";
                 document.getElementById("start").style.backgroundImage = "url(\"ready.png\")";
             }
+
 
             //document.getElementById("ready-controller").style.display = "none";
             //document.getElementById("gameplay-controller").style.display = "block";
@@ -242,7 +248,7 @@
         <div id="fox" class="button button-fox" ontouchstart="touch('fox')"></div>
         <div id="chicken" class="button button-chicken" ontouchstart="touch('chicken')"></div>
         <div id="viper" class="button button-viper" ontouchstart="touch('viper')"></div>
-        <div class="accept-button" ontouchstart="touch('accepted')"></div>
+        <div id="check" class="accept-button" ontouchstart="touch('accepted')"></div>
         <div class="icons"></div>
     </div>
 
