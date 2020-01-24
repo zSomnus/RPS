@@ -41,6 +41,7 @@ namespace Game.Scripts.MainMenu
                 }
                 else
                 {
+                    AirConsole.instance.Broadcast("Cancelled");
                     StopAllCoroutines();
                 }
             }
@@ -48,6 +49,7 @@ namespace Game.Scripts.MainMenu
 
         IEnumerator LoadMainGame()
         {
+            AirConsole.instance.Broadcast("Starting");
             yield return new WaitForSeconds(3);
             AirConsole.instance.Broadcast("Ready");
             AirConsoleController.instance.SwitchUI();

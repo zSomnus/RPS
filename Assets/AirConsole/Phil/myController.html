@@ -26,6 +26,17 @@
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("chicken").style.border = "none";
                     document.getElementById("viper").style.border = "none";
+                    document.getElementById("fox").style.backgroundImage = "url(\"CardFox.png\")";
+                    document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
+                    document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
+                }
+
+                else if (data == "Starting") {
+                    document.getElementById("waiting").style.backgroundImage = "url(\"starting.png\")";
+                }
+
+                else if (data == "Cancelled") {
+                    document.getElementById("waiting").style.backgroundImage = "url(\"waiting.png\")";
                 }
             }
             /*
@@ -61,19 +72,27 @@
                     document.getElementById("fox").style.border = "thick solid #0000FF";
                     document.getElementById("chicken").style.border = "none";
                     document.getElementById("viper").style.border = "none";
-                    //document.getElementById("fox").style.backgroundImage = "url(\"CardViper.png\")";
+                    document.getElementById("fox").style.backgroundImage = "url(\"CardFoxAnimation.gif\")";
+                    document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
+                    document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
                 }
 
                 else if (value == 'chicken') {
                     document.getElementById("chicken").style.border = "thick solid #0000FF";
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("viper").style.border = "none";
+                    document.getElementById("fox").style.backgroundImage = "url(\"CardFox.png\")";
+                    document.getElementById("chicken").style.backgroundImage = "url(\"CardChickenAnimation.gif\")";
+                    document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
                 }
 
                 else if (value == 'viper') {
                     document.getElementById("viper").style.border = "thick solid #0000FF";
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("chicken").style.border = "none";
+                    document.getElementById("fox").style.backgroundImage = "url(\"CardFox.png\")";
+                    document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
+                    document.getElementById("viper").style.backgroundImage = "url(\"CardViperAnimation.gif\")";
                 }
 
             }
