@@ -102,7 +102,7 @@
             if (value == 'accepted') {
                 accepted = true;
                 document.getElementById("check").style.backgroundImage = "url(\"Check3.png\")";
-                airconsole.message(AirConsole.SCREEN, value)
+                this.airconsole.message(AirConsole.Screen, { "action": choice });
             }
         }
 
