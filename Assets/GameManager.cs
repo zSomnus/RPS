@@ -59,16 +59,23 @@ public class GameManager : MonoBehaviour
         var player = AirConsoleController.GetPlayerWithDeviceId(from);
         var message = data.ToString();
         print($"Message sent is {message}");
-        switch (message)
+        Debug.Log(from);
+        switch (data["action"].ToString())
         {
             case "viper":
                 player.handGesture = HandGesture.Viper;
+                instance.TryGeneratePlayerCard();
+                instance.TryFlipCardIfPlayerReady();
                 break;
             case "chicken":
                 player.handGesture = HandGesture.Chicken;
+                instance.TryGeneratePlayerCard();
+                instance.TryFlipCardIfPlayerReady();
                 break;
             case "fox":
                 player.handGesture = HandGesture.Fox;
+                instance.TryGeneratePlayerCard();
+                instance.TryFlipCardIfPlayerReady();
                 break;
             case "accepted":
                 TryGeneratePlayerCard();
