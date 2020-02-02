@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.ChickenSnakeGame);
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.FoxChickenGameScene);
 
                     AirConsoleController.players[0].healthPoint--;
                 }
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.FoxChickenGameScene);
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.SnakeFoxGameScene);
 
                     AirConsoleController.players[0].healthPoint--;
                 }
@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.SnakeFoxGameScene);
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.ChickenSnakeGame);
 
                     AirConsoleController.players[0].healthPoint--;
                 }
