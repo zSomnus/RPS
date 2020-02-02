@@ -182,6 +182,7 @@ public class GameManager : MonoBehaviour
         if (AirConsoleController.players[0].handGesture == AirConsoleController.players[1].handGesture)
         {
             print("It is a draw");
+            AirConsole.instance.Broadcast("Draw");
             return null;
         }
         else
@@ -192,12 +193,14 @@ public class GameManager : MonoBehaviour
                 {
                     result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1], MiniGameSceneDataSource.ChickenSnakeGame);
                     AirConsoleController.players[1].healthPoint--;
+                    AirConsole.instance.Broadcast("P1Win");
                 }
                 else
                 {
                     result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.FoxChickenGameScene);
 
                     AirConsoleController.players[0].healthPoint--;
+                    AirConsole.instance.Broadcast("P2Win");
                 }
             }
 
@@ -208,12 +211,16 @@ public class GameManager : MonoBehaviour
                     result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1], MiniGameSceneDataSource.FoxChickenGameScene);
 
                     AirConsoleController.players[1].healthPoint--;
+                    AirConsole.instance.Broadcast("P1Win");
+
                 }
                 else
                 {
                     result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.SnakeFoxGameScene);
 
                     AirConsoleController.players[0].healthPoint--;
+                    AirConsole.instance.Broadcast("P2Win");
+
                 }
             }
 
@@ -224,12 +231,16 @@ public class GameManager : MonoBehaviour
                     result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1], MiniGameSceneDataSource.SnakeFoxGameScene);
 
                     AirConsoleController.players[1].healthPoint--;
+                    AirConsole.instance.Broadcast("P1Win");
+
                 }
                 else
                 {
                     result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.ChickenSnakeGame);
 
                     AirConsoleController.players[0].healthPoint--;
+                    AirConsole.instance.Broadcast("P2Win");
+
                 }
             }
         }

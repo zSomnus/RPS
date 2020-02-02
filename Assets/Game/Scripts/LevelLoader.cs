@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NDream.AirConsole;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +33,7 @@ namespace Game.Scripts
         public void LoadMainGame()
         {
             StartCoroutine(LoadLevel(maingameSceneIndex));
+            AirConsole.instance.Broadcast("Reset");
         }
 
         IEnumerator LoadLevel(int levelIndex)
