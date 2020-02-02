@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
             CardGenerator.instance.ClearBoard();
             print("Board is cleared");
             state = GameState.CardSelect;
+            AirConsole.instance.Broadcast("Reset");
         }
        
     }
