@@ -162,6 +162,52 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MiniGameControls"",
+            ""id"": ""ece53010-fde0-4144-9a8d-33c0b87e3c77"",
+            ""actions"": [
+                {
+                    ""name"": ""Chicken"",
+                    ""type"": ""Button"",
+                    ""id"": ""b614d3b4-e792-4c78-bc88-b810c3a9d903"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Viper"",
+                    ""type"": ""Button"",
+                    ""id"": ""17f315f5-a653-4253-93df-59f0ad7906f5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8a55b6f8-bb56-4e51-9084-6d0fb4ecc6a5"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Chicken"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71fd3506-1e2d-4021-9971-057a6fa9ed2d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Viper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -177,6 +223,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         // Test
         m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
         m_Test_BackToMainGame = m_Test.FindAction("BackToMainGame", throwIfNotFound: true);
+        // MiniGameControls
+        m_MiniGameControls = asset.FindActionMap("MiniGameControls", throwIfNotFound: true);
+        m_MiniGameControls_Chicken = m_MiniGameControls.FindAction("Chicken", throwIfNotFound: true);
+        m_MiniGameControls_Viper = m_MiniGameControls.FindAction("Viper", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -328,6 +378,47 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public TestActions @Test => new TestActions(this);
+
+    // MiniGameControls
+    private readonly InputActionMap m_MiniGameControls;
+    private IMiniGameControlsActions m_MiniGameControlsActionsCallbackInterface;
+    private readonly InputAction m_MiniGameControls_Chicken;
+    private readonly InputAction m_MiniGameControls_Viper;
+    public struct MiniGameControlsActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public MiniGameControlsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Chicken => m_Wrapper.m_MiniGameControls_Chicken;
+        public InputAction @Viper => m_Wrapper.m_MiniGameControls_Viper;
+        public InputActionMap Get() { return m_Wrapper.m_MiniGameControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MiniGameControlsActions set) { return set.Get(); }
+        public void SetCallbacks(IMiniGameControlsActions instance)
+        {
+            if (m_Wrapper.m_MiniGameControlsActionsCallbackInterface != null)
+            {
+                @Chicken.started -= m_Wrapper.m_MiniGameControlsActionsCallbackInterface.OnChicken;
+                @Chicken.performed -= m_Wrapper.m_MiniGameControlsActionsCallbackInterface.OnChicken;
+                @Chicken.canceled -= m_Wrapper.m_MiniGameControlsActionsCallbackInterface.OnChicken;
+                @Viper.started -= m_Wrapper.m_MiniGameControlsActionsCallbackInterface.OnViper;
+                @Viper.performed -= m_Wrapper.m_MiniGameControlsActionsCallbackInterface.OnViper;
+                @Viper.canceled -= m_Wrapper.m_MiniGameControlsActionsCallbackInterface.OnViper;
+            }
+            m_Wrapper.m_MiniGameControlsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Chicken.started += instance.OnChicken;
+                @Chicken.performed += instance.OnChicken;
+                @Chicken.canceled += instance.OnChicken;
+                @Viper.started += instance.OnViper;
+                @Viper.performed += instance.OnViper;
+                @Viper.canceled += instance.OnViper;
+            }
+        }
+    }
+    public MiniGameControlsActions @MiniGameControls => new MiniGameControlsActions(this);
     public interface IPlayerControlsActions
     {
         void OnP1Rock(InputAction.CallbackContext context);
@@ -340,5 +431,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     public interface ITestActions
     {
         void OnBackToMainGame(InputAction.CallbackContext context);
+    }
+    public interface IMiniGameControlsActions
+    {
+        void OnChicken(InputAction.CallbackContext context);
+        void OnViper(InputAction.CallbackContext context);
     }
 }

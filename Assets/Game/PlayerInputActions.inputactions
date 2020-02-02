@@ -149,6 +149,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "MiniGameControls",
+            "id": "ece53010-fde0-4144-9a8d-33c0b87e3c77",
+            "actions": [
+                {
+                    "name": "Chicken",
+                    "type": "Button",
+                    "id": "b614d3b4-e792-4c78-bc88-b810c3a9d903",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Viper",
+                    "type": "Button",
+                    "id": "17f315f5-a653-4253-93df-59f0ad7906f5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8a55b6f8-bb56-4e51-9084-6d0fb4ecc6a5",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Chicken",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71fd3506-1e2d-4021-9971-057a6fa9ed2d",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Viper",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

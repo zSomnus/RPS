@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Snake
+  - Chicken
   layers:
   - Default
   - TransparentFX
@@ -43,4 +45,13 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3363764293
+    locked: 0
+  - name: BackGround
+    uniqueID: 3442869861
+    locked: 0
+  - name: Subject
+    uniqueID: 243349893
+    locked: 0
+  - name: ForeGround
+    uniqueID: 3278468023
     locked: 0
