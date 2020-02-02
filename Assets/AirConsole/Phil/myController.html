@@ -14,12 +14,19 @@
             document.getElementById("ready-controller").style.display = "block";
             document.getElementById("gameplay-controller").style.display = "none";
             document.getElementById("waiting").style.display = "none";
+            document.getElementById("Player1-wins").style.display = "none";
+            document.getElementById("Player2-wins").style.display = "none";
+            document.getElementById("draw").style.display = "none";
             //document.getElementById("ready").style.display = "none";
 
             this.airconsole.onMessage = function (from, data) {
                 if (data == "Ready") {
                     document.getElementById("ready-controller").style.display = "none";
                     document.getElementById("gameplay-controller").style.display = "block";
+                    document.getElementById("Player1-wins").style.display = "none";
+                    document.getElementById("Player2-wins").style.display = "none";
+                    document.getElementById("draw").style.display = "none";
+
                 }
 
                 else if (data == "Reset") {
@@ -27,6 +34,10 @@
                     document.getElementById("fox").style.border = "none";
                     document.getElementById("chicken").style.border = "none";
                     document.getElementById("viper").style.border = "none";
+                    document.getElementById("Player1-wins").style.display = "none";
+                    document.getElementById("Player2-wins").style.display = "none";
+                    document.getElementById("draw").style.display = "none";
+
                     document.getElementById("fox").style.backgroundImage = "url(\"CardFox.png\")";
                     document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
                     document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
@@ -39,6 +50,20 @@
 
                 else if (data == "Cancelled") {
                     document.getElementById("waiting").style.backgroundImage = "url(\"waiting.png\")";
+                }
+                else if (data == "P1Win") {
+                    document.getElementById("gameplay-controller").style.display = "none";
+                    document.getElementById("Player1-wins").style.display = "block";
+                    //document.getElementById("Player1-win").style.backgroundImage = "url(\"Player-1-wins.png\")";
+                }
+                else if (data == "P2Win") {
+                    document.getElementById("gameplay-controller").style.display = "none";
+                    document.getElementById("Player2-wins").style.display = "block";
+                    //document.getElementById("Player2-win").style.backgroundImage = "url(\"Player-2-wins.png\")";
+                }
+                else if (data == "Draw") {
+                    document.getElementById("gameplay-controller").style.display = "none";
+                    document.getElementById("draw").style.display = "block";
                 }
             }
             /*
@@ -72,6 +97,9 @@
                     document.getElementById("fox").style.border = "thick solid #00FF00";
                     document.getElementById("chicken").style.border = "none";
                     document.getElementById("viper").style.border = "none";
+                    document.getElementById("Player1-wins").style.display = "none";
+                    document.getElementById("Player2-wins").style.display = "none";
+
                     document.getElementById("fox").style.backgroundImage = "url(\"CardFoxAnimation.gif\")";
                     document.getElementById("chicken").style.backgroundImage = "url(\"CardChicken.png\")";
                     document.getElementById("viper").style.backgroundImage = "url(\"CardViper.png\")";
@@ -232,6 +260,22 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
+        #Player1-wins{
+            /*background-image: url("Player-1-wins.png");*/
+            margin:auto;
+            color: white;
+        }
+        #Player1-wins img{
+            margin:auto;
+        }
+        #Player2-wins{
+            /*background-image: url("Player-2-wins.png");*/
+            margin:auto;
+            color: white;
+        }
+        #Player2-wins img{
+            margin:auto;
+        }
     </style>
 </head>
 <!--<body onload="window.app = new App()">
@@ -250,6 +294,18 @@
         <div id="viper" class="button button-viper" ontouchstart="touch('viper')"></div>
         <div id="check" class="accept-button" ontouchstart="touch('accepted')"></div>
         <div class="icons"></div>
+    </div>
+
+    <div id="Player1-wins">
+        <img alt="Player-1-wins" src="Player-1-wins.png" />
+    </div>
+
+    <div id="Player2-wins">
+        <img alt="Player-2-wins" src="Player-2-wins.png" />
+    </div>
+
+    <div id="draw">
+        <img alt="draw" src="Draw.png" />
     </div>
 
 </body>
