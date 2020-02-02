@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Game/Scenes/MiniGame(Test).unity
     guid: ed3cf2607022dd64bb216403739eee83
+  - enabled: 1
+    path: Assets/ChickenSnakeGame/Scenes/ChickenSnakeGame.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

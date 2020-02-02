@@ -110,7 +110,8 @@ public class GameManager : MonoBehaviour
             state = GameState.MiniGame;
             LevelLoader levelLoader = FindObjectOfType<LevelLoader>();
             AirConsoleController.instance.miniGameInputData = miniGameInputData;    // TODO 
-            levelLoader.LoadMinigame();
+            print("Loading scene "+miniGameInputData.miniGameSceneIndex);
+            levelLoader.LoadMinigame(miniGameInputData.miniGameSceneIndex);
         }
         else
         {
@@ -153,13 +154,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator FlipCards(float sec)
+    private IEnumerator FlipCards(float sec)
     {
         yield return new WaitForSeconds(sec);
         FlipCards();
     }
 
-    public void FlipCards()
+    private void FlipCards()
     {
         state = GameState.FilpCard;
         CardFlip p1Card = CardGenerator.instance.cardPositionPlayers[0].GetComponentInChildren<CardFlip>();
@@ -175,7 +176,7 @@ public class GameManager : MonoBehaviour
     /// 
     /// </summary>
     /// <returns>The player who wins</returns>
-    public MiniGameInputData Judge()
+    private MiniGameInputData Judge()
     {
         MiniGameInputData result = null;
         if (AirConsoleController.players[0].handGesture == AirConsoleController.players[1].handGesture)
@@ -189,12 +190,12 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Viper)
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
+                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1], MiniGameSceneDataSource.ChickenSnakeGame);
                     AirConsoleController.players[1].healthPoint--;
                 }
                 else
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0]);
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.ChickenSnakeGame);
 
                     AirConsoleController.players[0].healthPoint--;
                 }
@@ -204,13 +205,13 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Chicken)
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
+                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1], MiniGameSceneDataSource.FoxChickenGameScene);
 
                     AirConsoleController.players[1].healthPoint--;
                 }
                 else
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0]);
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.FoxChickenGameScene);
 
                     AirConsoleController.players[0].healthPoint--;
                 }
@@ -220,13 +221,13 @@ public class GameManager : MonoBehaviour
             {
                 if (AirConsoleController.players[1].handGesture == HandGesture.Fox)
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1]);
+                    result = new MiniGameInputData(AirConsoleController.players[0],AirConsoleController.players[1], MiniGameSceneDataSource.SnakeFoxGameScene);
 
                     AirConsoleController.players[1].healthPoint--;
                 }
                 else
                 {
-                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0]);
+                    result = new MiniGameInputData(AirConsoleController.players[1],AirConsoleController.players[0], MiniGameSceneDataSource.SnakeFoxGameScene);
 
                     AirConsoleController.players[0].healthPoint--;
                 }

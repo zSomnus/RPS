@@ -9,7 +9,6 @@ namespace Game.Scripts
         private Animator transition;
 
         public int maingameSceneIndex = 1;
-        public int minigameSceneIndex = 2;
 
         public float transitionTime = 1;
         // Start is called before the first frame update
@@ -25,9 +24,9 @@ namespace Game.Scripts
             StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
         }
 
-        public void LoadMinigame()
+        public void LoadMinigame(int miniGameSceneIndex)
         {
-            StartCoroutine(LoadLevel(minigameSceneIndex));
+            StartCoroutine(LoadLevel(miniGameSceneIndex));
         }
 
         public void LoadMainGame()
